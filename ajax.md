@@ -8,7 +8,7 @@
 
 ```java
 //将获取到的数据集合（需要在页面显示的数据）转换为json格式，其中arrayList为要显示的数据集合
-//需要导包 fastjson-1.2.75.jar [可在(https://github.com/1binbin/knowledge/tree/master/lib)中下载]
+//需要导包 fastjson-1.2.75.jar [可在(https://github.com/1binbin/knowledge/tree/master/lib)中下载，jar包存放位置与导入项目与其他jar包一样]
 //所谓的json数据格式可以理解为 键值对 的格式
 JSONArray jsonArray = (JSONArray) JSONObject.toJSON(arrayList);
 
