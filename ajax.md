@@ -85,26 +85,30 @@ function showgoods() {
     xml.send(null);
 }
 ```
+
 ```javascript
 // 格式化josn字符串
-function formatDate(NewDtime) {
-    var dt = new Date(parseInt(NewDtime.slice(6, 19)));
+function formatDate(JSONDate) {
+    //根据json解析的日期的数据创建Data类
+    // var dt = new Date(parseInt(JSONDate.slice(6, 19)));
+    var dt = new Date(parseInt(JSONDate));
+    //分别获取Data中的年份日，时分秒
     var year = dt.getFullYear();
     var month = dt.getMonth() + 1;
-    month=("0"+month);
-    month=month.substring(month.length-2);
+    month = ("0" + month);
+    month = month.substring(month.length - 2);
     var date = dt.getDate();
-    date=("0"+date);
-    date=date.substring(date.length-2);
+    date = ("0" + date);
+    date = date.substring(date.length - 2);
     var hour = dt.getHours();
-    hour=("0"+hour);
-    hour=hour.substring(hour.length-2);
+    hour = ("0" + hour);
+    hour = hour.substring(hour.length - 2);
     var minute = dt.getMinutes();
-    minute=("0"+minute);
-    minute=minute.substring(minute.length-2);
+    minute = ("0" + minute);
+    minute = minute.substring(minute.length - 2);
     var second = dt.getSeconds();
-    second=("0"+second);
-    second=second.substring(second.length-2);
+    second = ("0" + second);
+    second = second.substring(second.length - 2);
 
     return year + "-" + month + "-" + date + " " + hour + ":" + minute + ":" + second;
 }
