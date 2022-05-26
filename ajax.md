@@ -30,7 +30,7 @@ printWriter.print(jsonArray);
 //此函数被执行某一事件显示响应时调用
 function showgoods() {
     //重写url路径，表示去调用servlet中的某个函数（如select）,编写action原因为servlet中使用了反射机制
-    //有关action与反射的知识移步到 javaweb.md 查看
+    //有关action与反射的知识移步到(https://github.com/1binbin/knowledge/blob/master/javaweb.md)查看
     var url = "<%=path%>/adminServlet?action=select";
     
     //获取XMLHttpRequest对象，可以请求服务器上的数据资源
