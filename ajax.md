@@ -63,6 +63,7 @@ function showgoods() {
                 
                 //拼接即将放在标签内部的字符串（这里以表格为例）
                 //以下使用的goods.gid中的gid为json数据的键，如果不清楚的可以在解析json数据后编写console.log(jsonArr)并在控制台查看键的名字
+                //对于日期类，需要进行格式转换，才能显示正常的格式 （参考formatDate函数）
                 temp +=
                     '<tr>' +
                     '<td>' + goods.gid + '</td>' +
@@ -83,4 +84,30 @@ function showgoods() {
     xml.send(null);
 }
 ```
+```javascript
+// 格式化josn字符串
+function formatDate(NewDtime) {
+    var dt = new Date(parseInt(NewDtime.slice(6, 19)));
+    var year = dt.getFullYear();
+    var month = dt.getMonth() + 1;
+    month=("0"+month);
+    month=month.substring(month.length-2);
+    var date = dt.getDate();
+    date=("0"+date);
+    date=date.substring(date.length-2);
+    var hour = dt.getHours();
+    hour=("0"+hour);
+    hour=hour.substring(hour.length-2);
+    var minute = dt.getMinutes();
+    minute=("0"+minute);
+    minute=minute.substring(minute.length-2);
+    var second = dt.getSeconds();
+    second=("0"+second);
+    second=second.substring(second.length-2);
+
+    return year + "-" + month + "-" + date + " " + hour + ":" + minute + ":" + second;
+}
+```
+
+
 
