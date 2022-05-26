@@ -1,3 +1,6 @@
+[TOC]
+------
+
 # JavaWeb
 
 ## 路径问题
@@ -79,12 +82,12 @@ username = new String(username.getBytes("ISO-8859-1"), "GBK");
 
 ```xml
 <filter>
-        <filter-name>过滤器名</filter-name>
-        <filter-class>过滤器所在类</filter-class>
-        <init-param>
-            <param-name>encoding</param-name>
-            <param-value>UTF-8</param-value>
-        </init-param>
+    <filter-name>过滤器名</filter-name>
+    <filter-class>过滤器所在类</filter-class>
+    <init-param>
+        <param-name>encoding</param-name>
+        <param-value>UTF-8</param-value>
+    </init-param>
 </filter>
 ```
 
@@ -125,3 +128,65 @@ username = new String(username.getBytes("ISO-8859-1"), "GBK");
   request.getCharacterEncoding();
   response.getCharacterEncoding();
   ```
+
+
+
+## 如何调用servlet中除doGet与doPost方法
+> 通常一个servlet中不会只有get和post等方法
+> 
+> 那么如何在servlet中编写自定义方法，并且可以在前端被调用到
+
+### 原理
+
+- 在servlet中个get方法写反射机制，所谓的反射就是得到类内部结构，在get中获取参数action的值，也就是获取需要调用的方法名
+- 根据获取到的方法名，通过反射机制去调用本类内部对应的方法
+
+### 后端部分
+
+在servlet中的doGet方法中编写反射
+
+```java
+//固定格式，直接写
+protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    String action = request.getParameter("action");
+    if (action != null) {
+        try {
+            Method method = this.getClass().getDeclaredMethod(action, HttpServletRequest.class, HttpServletResponse.class);
+            method.invoke(this, request, response);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    } else {
+        this.doPost(request, response);
+    }
+}
+```
+
+
+
+### 前端部分
+
+1. 在表单中调用
+
+   ```jsp
+   <%--在form表单中的action指向的是自定义方法所在的servlet的value值--%>
+   <%--method可以用post或get--%>
+   <form action="<%=path%>/adminServlet" method="post">
+       
+       <%--核心！！ 编写一个hidden(隐藏)类型的input 属性有name为action,value为自定义方法名--%>
+       <input type="hidden" name="action" value="insert">
+       <input type="text" name="gnum" class="minput">
+       
+       <%--需要submit的按钮，点击后访问的就是value值为adminServlet中的insert方法--%>
+       <input type="submit" value="确定" />
+   </form>
+   ```
+
+   
+
+2. 在其他url中调用
+
+   - 反射的原理即为在servlet获取调用的方法名，也就是参数action的值
+   - 故在url中添加一个参数action，设置其值为要调用的方法名
+   - 如url为  url = "<%=path%>/adminServlet?action=select" 问号前面为**需要调用的资源**adminServlet为servlet的value值; 问号后面为参数，格式为  **参数名=参数值** 
+   - 当访问这个url时，在servlet中就可以获取到action的值为select，那么通过反射就可以去调用select方法
