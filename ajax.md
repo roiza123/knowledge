@@ -1,16 +1,11 @@
-[TOC]
-------
-
 # AJAX应用之一：局部更新数据
-
-
 ## 后端部分
 
 在被前端调用的函数中编写
 
 ```java
 //将获取到的数据集合（需要在页面显示的数据）转换为json格式，其中arrayList为要显示的数据集合
-//需要导包 fastjson-1.2.75.jar [可在/knowledge/lib中下载]
+//需要导包 fastjson-1.2.75.jar [可在(https://github.com/1binbin/knowledge/tree/master/lib)中下载]
 //所谓的json数据格式可以理解为 键值对 的格式
 JSONArray jsonArray = (JSONArray) JSONObject.toJSON(arrayList);
 
