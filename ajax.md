@@ -89,6 +89,7 @@ function showgoods() {
 ```javascript
 // 格式化josn字符串
 function formatDate(JSONDate) {
+    //json解析日期得到的数据是时间戳，需要用它创建一个Data对象，并且格式化输出
     //根据json解析的日期的数据创建Data类
     // var dt = new Date(parseInt(JSONDate.slice(6, 19)));
     //获取到的dt格式为 标准时间 Thu May 23 1726 08:05:43 GMT+0805 (中国标准时间)
