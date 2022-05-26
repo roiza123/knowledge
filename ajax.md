@@ -91,8 +91,10 @@ function showgoods() {
 function formatDate(JSONDate) {
     //根据json解析的日期的数据创建Data类
     // var dt = new Date(parseInt(JSONDate.slice(6, 19)));
+    //获取到的dt格式为 标准时间 Thu May 23 1726 08:05:43 GMT+0805 (中国标准时间)
     var dt = new Date(parseInt(JSONDate));
     //分别获取Data中的年份日，时分秒
+    //获取时间的部分，可以用内定的时间转化方法，详细查看(http://t.csdn.cn/trQt4)
     var year = dt.getFullYear();
     var month = dt.getMonth() + 1;
     month = ("0" + month);
