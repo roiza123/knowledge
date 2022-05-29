@@ -90,9 +90,9 @@
 ### 通过request.getParameter(name)获取URL地址中的中文参数
 
 ```java
-//对出现乱码的变量设置,优先设置为GBK,若有问题设置为utf-8
+//对出现乱码的变量设置,优先设置为utf-8,若有问题设置为gbk
 String username = req.getParameter("username");
-username = new String(username.getBytes("ISO-8859-1"), "GBK");
+username = new String(username.getBytes("ISO-8859-1"), "utf-8");
 ```
 
 ### 通过在web.xml配置过滤器解决乱码
