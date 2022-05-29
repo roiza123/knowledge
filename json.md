@@ -15,7 +15,7 @@ json 语句示例
       {
         "name": "html",
         "years": "5"
-      }，
+      },
       {
         "name": "css",
         "years": "3" 
