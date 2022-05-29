@@ -13,17 +13,17 @@ json 语句示例
   "skillz": {
     "web": [ 
       {
-        "name": "html"，
+        "name": "html",
         "years": "5"
       }，
       {
-        "name": "css"，
+        "name": "css",
         "years": "3" 
       }
     ],
     "database": [
       {
-        "name": "sql"，
+        "name": "sql",
         "years": "7" 
       }
     ]
