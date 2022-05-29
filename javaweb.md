@@ -2,7 +2,7 @@
 
 ## 路径问题
 
-### jsp调用其他资源(包括jsp，servlet，css，png，jpeg等)
+### jsp调用其他资源(包括jsp，css，png，jpeg等)
 
 - 在**head**标签中书写基准路径**path**
 
@@ -32,6 +32,26 @@
       
       <form action="<%=path%>/adminServlet" method="post"></form>
       ```
+
+### jsp中再表达式语言（即java语言部分）调用servlet
+
+- 使用相对路径，规则如下（与html中的相对路径规则一样）
+    - 相对路径必须保证在**同一根目录**
+    - ../ 表示上一级目录
+    - ./ 表示当前目录 (放在开头可以省略)
+
+- 比如以下目录结构
+    - jsp
+        - admin
+        - user
+
+    - html
+        - a
+
+
+如果在 a 中调用 admin 为 ../jsp/admin
+
+如果在 admin 中调用 user 为 user
 
 ### servlet调用jsp等资源
 
@@ -130,7 +150,7 @@ username = new String(username.getBytes("ISO-8859-1"), "GBK");
 
 ## 如何调用servlet中除doGet与doPost方法
 > 通常一个servlet中不会只有get和post等方法
-> 
+>
 > 那么如何在servlet中编写自定义方法，并且可以在前端被调用到
 
 ### 原理
@@ -179,11 +199,11 @@ protected void doGet(HttpServletRequest request, HttpServletResponse response) t
    </form>
    ```
 
-   
+
 
 2. 在其他url中调用
 
-   - 反射的原理即为在servlet获取调用的方法名，也就是参数action的值
-   - 故在url中添加一个参数action，设置其值为要调用的方法名
-   - 如url为  url = "<%=path%>/adminServlet?action=select" 问号前面为**需要调用的资源**adminServlet为servlet的value值; 问号后面为参数，格式为  **参数名=参数值** 
-   - 当访问这个url时，在servlet中就可以获取到action的值为select，那么通过反射就可以去调用select方法
+    - 反射的原理即为在servlet获取调用的方法名，也就是参数action的值
+    - 故在url中添加一个参数action，设置其值为要调用的方法名
+    - 如url为  url = "<%=path%>/adminServlet?action=select" 问号前面为**需要调用的资源**adminServlet为servlet的value值; 问号后面为参数，格式为  **参数名=参数值**
+    - 当访问这个url时，在servlet中就可以获取到action的值为select，那么通过反射就可以去调用select方法
