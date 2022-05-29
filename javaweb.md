@@ -207,3 +207,69 @@ protected void doGet(HttpServletRequest request, HttpServletResponse response) t
    - 故在url中添加一个参数action，设置其值为要调用的方法名
    - 如url为  url = "<%=path%>/adminServlet?action=select" 问号前面为**需要调用的资源**adminServlet为servlet的value值; 问号后面为参数，格式为  **参数名=参数值** 
    - 当访问这个url时，在servlet中就可以获取到action的值为select，那么通过反射就可以去调用select方法
+
+## 文件上传与下载
+
+### 文件上传
+
+jsp部分
+
+- form表单必须post请求，必须写enctype="multipart/form-data"
+- input类型为file
+
+servlet部分
+
+```java
+//缓存目录，注解写在类首行
+@MultipartConfig(location = "D:\\", fileSizeThreshold = 1024)
+//获取根目录，path相当与webapp文件夹（便于后续写路径）
+//实际上，path指向的事target里面保存网页资源的文件夹
+String path = this.getServletContext().getRealPath("/");
+Part p = request.getPart("file");
+//判断文件大小
+if (p.getSize() > 1024 * 1024) {
+    p.delete();
+} else {
+    //相当与保存在webapp/Product_main_photo 下
+    path = path + "\\Product_main_photo";
+    File file = new File(path);
+    if (!file.exists()) {
+        file.mkdirs();
+    }
+    String filename =  "1.jpg";
+    //保存文件
+    p.write(path + "\\" + filename);
+}
+```
+
+### 文件读取
+
+- 读取上传的资源时，相对于webapp去读取，比如上个例子，相对于webapp/Product_main_photo读取
+
+### 文件下载
+
+```java
+@Override
+protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    //获得请求文件名
+    String filename=request.getParameter("filename");
+    //设置文件MIME类型
+    response.setContentType(getServletContext().getMimeType(filename));
+    //设置Content-Disposition
+    response.setHeader("Content-Disposition","attachment;filename="+filename);
+    //读取目标文件，通过response将目标文件写到客户端
+    //获取目标文件的绝对路径
+    String fullFileName=getServletContext().getRealPath("/img/"+filename);
+    //读取文件
+    InputStream inputStream= Files.newInputStream(Paths.get(fullFileName));
+    OutputStream outputStream=response.getOutputStream();
+    //写文件
+    int b;
+    while((b=inputStream.read())!=-1){
+        outputStream.write(b);
+    }
+    inputStream.close();
+    outputStream.close();
+}
+```
+
