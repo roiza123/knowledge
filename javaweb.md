@@ -33,7 +33,7 @@
       <form action="<%=path%>/adminServlet" method="post"></form>
       ```
 
-### jsp中再表达式语言（即java语言部分）调用servlet
+### jsp中在表达式语句（即java语言部分）调用servlet
 
 - 使用相对路径，规则如下（与html中的相对路径规则一样）
     - 相对路径必须保证在**同一根目录**
