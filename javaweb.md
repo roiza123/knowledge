@@ -145,7 +145,10 @@ username = new String(username.getBytes("ISO-8859-1"), "utf-8");
   request.getCharacterEncoding();
   response.getCharacterEncoding();
   ```
-
+- java获取当前文件编码
+    ```java
+    System.out.println(System.getProperty("file.encoding"));
+```
 
 
 ## 如何调用servlet中除doGet与doPost方法
