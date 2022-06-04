@@ -8,30 +8,34 @@
 
   ```jsp
   <% 
-  	String path = request.getContextPath();
+      String path = request.getContextPath();
   %>
   ```
+- 在html中书写base标签
+    ```html
+    <base href="/项目名称(运行配置中查找)/">
+    ```
 
-    - 调用jsp、css等保存在webapp中的资源 => 路径格式：**基准路径/相对于webapp的路径**
+  - 调用jsp、css等保存在webapp中的资源 => 路径格式：**基准路径/相对于webapp的路径**
 
-      ```jsp
-      <%-- 1.admin.css保存在webapp/css/admin.css中，故相对于webapp路径为css/admin.css ,故加上基准路径为 <%=path%>/css/admin.css --%>
+    ```jsp
+    <%-- 1.admin.css保存在webapp/css/admin.css中，故相对于webapp路径为css/admin.css ,故加上基准路径为 <%=path%>/css/admin.css --%>
       
-      <link href="<%=path%>/css/admin.css" rel="stylesheet">
+    <link href="<%=path%>/css/admin.css" rel="stylesheet">
       
-      <%-- 2.admin.jsp保存在webapp/jsp/index.jsp中，故相对于webapp路径为jsp/index.jsp ,故加上基准路径为 <%=path%>/jsp/index.jsp --%>
+    <%-- 2.admin.jsp保存在webapp/jsp/index.jsp中，故相对于webapp路径为jsp/index.jsp ,故加上基准路径为 <%=path%>/jsp/index.jsp --%>
       
-      window.open("<%=path%>/jsp/index.jsp", "_self")
-      ```
+    window.open("<%=path%>/jsp/index.jsp", "_self")
+    ```
 
-    - 调用servlet => 路径格式：**基准路径/servlet的value值**
+  - 调用servlet => 路径格式：**基准路径/servlet的value值**
 
-      ```jsp
-      <%-- 由于servlet中注解value值为 adminServlet(注解如下) 故路径为 <%=path%>/adminServlet --%>
-      //@WebServlet(name = "adminServlet", value = "/adminServlet")
+    ```jsp
+    <%-- 由于servlet中注解value值为 adminServlet(注解如下) 故路径为 <%=path%>/adminServlet --%>
+    //@WebServlet(name = "adminServlet", value = "/adminServlet")
       
-      <form action="<%=path%>/adminServlet" method="post"></form>
-      ```
+    <form action="<%=path%>/adminServlet" method="post"></form>
+    ```
 
 ### jsp中在表达式语句（即java语言部分）调用servlet
 
