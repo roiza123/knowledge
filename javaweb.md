@@ -280,3 +280,11 @@ protected void doGet(HttpServletRequest request, HttpServletResponse response) t
 }
 ```
 
+## 408请求超时解决
+- 禁止缓存
+```html
+ <meta http-equiv="Cache-Control" content="no-store,no-cache,must-revalidate"> 
+ <meta http-equiv="Pragma" content="no-cache"> 
+ <meta http-equiv="Expires" content="-1">  
+```
+
